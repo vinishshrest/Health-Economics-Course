@@ -1,0 +1,331 @@
+---
+title: "Regression"
+author: "Vinish Shrestha"
+date: "08/27/2021"
+output:
+  beamer_presentation: default
+  ioslides_presentation: default
+  slidy_presentation: default
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Summation
+ $\sum^{n}_{i=1}x_{i}=x_1+x_2+...+x_{n}$, where n is a positive integer. 
+ 
+- $X$ is a random variable, i.e. flip of a coin
+- $x_{i}$ is a realized outcome
+
+$~$  
+
+- Say, flip a coin; $head = \$1$ and $tail = -1$.
+    - $n = 5$ 
+    - $x_1=h,\;x_2=t,\;x_3=h,\;x_4=t,\;x_5=h$
+    
+$~$  
+
+Then, $\sum^{5}_{i=1}x_{i}=1 -1 + 1 -1 +1 = 1$
+
+
+## Some laws about summation 
+- $\sum_{i=1}^{n} x_i^2 \neq (\sum_{i=1}^{n} x_i)^2$ 
+
+- given that $a$ and $b$ are constants 
+- $\sum_{i=1}^{n} (ax_i + bx_i) = \sum_{i=1}^{n} ax_i + \sum_{i=1}^{n} bx_i$
+- $\frac{\sum_{i=1}^{n}x_i}{\sum_{i=1}^{n}y_i}\neq \sum_{i=1}^{n} \frac{x_i}{y_i}$
+- $\bar{x} = \frac{\sum_{i=1}^{n}x_i}{n}$ ; (sample) average 
+- $\sum_{i=1}^{n}(x_i - \bar{x})^2 = \sum_{i=1}^{n}x_i^2 - n\bar{x}$ 
+
+## Average height of 10 people 
+```{r fig1, fig.height=1.5, fig.width=1.5, fig.align="center"}
+set.seed = 1
+height = rnorm(10, 5.7, 0.5)
+print(round(height, 2))
+```
+- check the average height of the sample
+- is it close to 5.7?
+- Why is it not exactly 5.7?
+
+```{r}
+mean(height)
+```
+
+## Large n 
+```{r, }
+set.seed = 1
+height = rnorm(10000, 5.7, 0.5)
+hist(height)
+
+```
+
+## Large n
+
+```{r}
+mean(height) #for a large n
+```
+
+## Expected value
+$E(X) = p_1x_1 + p_2x_2 + p_3x_3...+p_nx_n$  
+
+where, $p_i$ is probability associated with outcome $x_i$.
+
+- say, get \$1 if head and -\$1 if tail. What is the expected payoff?
+
+
+## Population vs Sample 
+- Population: entire group
+    - population of this university student body: **all students**
+    - you'd fall in it 
+
+- Sample: a subset of the population 
+    - you could either be or not be in the sample 
+    
+- expectation, $E()$ is a population concept
+
+
+##  Additional properties of the expectation operator 
+Consider two random variables $W$ and $H$
+
+- $E(aW+b)=aE(W)+b$
+- $E(W+H)=E(W)+E(H)$; linear operator 
+- $E(W-E(W))=E(W)-E(E(W))=0$
+
+$~$
+
+- $Variance(W)=\sigma^2=E(W-E(W))^2$: population concept
+- $E[(W^2)-(E(W))^2]$: population concept
+
+$~$
+
+- $\hat{S}^2=\frac{1}{n-1}\sum_{i=1}^n(x_i-\bar{x})^2$; sample variance
+- $\hat{S}= \frac{1}{n-1}[\sum_{i=1}^n(x_i-\bar{x})^2]^{1/2}$; sample standard deviation
+
+
+## How two variables move ..
+Very often we are concerned with how variables are related to one another 
+
+- Temperature and crime. 
+- GPA and earnings.
+- Mobility and COVID19 cases.
+
+Covariance and correlation describes how variables are *linearly* related to one another.
+
+
+## Covariance 
+Consider random variables X and Y 
+
+- $Cov(X,Y)$ 
+    - $= E(X-E(X))E(Y-E(Y))$
+    - $= E(X)E(Y)-E(XY)$
+    
+- $0$ covariance does not necessarily mean that $X$ and $Y$ are independent 
+
+- But if $X$ and $Y$ are independent, $Cov(X,Y)=0$.
+    - if $X$ and $Y$ are independent, $E(X)E(Y)=E(XY)$
+    
+- $\sum_{i=1}^n \frac{(x_i - \bar{x_i})(y_i - \bar{y_i})}{(n-1)}$; sample covariance
+    - $(n-1)$ is used in the denominator for unbiasedness of the estimator when $E()$ is unknown. 
+    
+## Correlation 
+- magnitude of covariance difficult to interpret
+- instead use correlation 
+- consider: $W=\frac{X-E(X)}{V(X)}$ and $Z=\frac{Z-E(Z)}{V(Z)}$, normalized to $mean = 0$ and $sd = 1$
+
+$~$
+
+- $Corr(W,Z)=Corr(X,Y)=\frac{Cov(X,Y)}{\sqrt(Var(X)Var(y))}$
+    - note that $Cov(a)$, if $a$ is a constant, is zero 
+    - $E(a)=a$, so $E(a-E(a))=0$
+- correlation coefficient bounded between -1 and 1
+- **Note: Just because two variables lead to a covariance of zero it does not mean that the two variables are independent. These variables 
+can still be related non-linearly. So in this regard, correlation is really a linear concept. This may not be suitable for non-linear analysis.**
+
+    
+## Covariance 
+Lets look at some simulations
+```{r}
+#uniform distribution
+set.seed(14825) # allows replicability
+a <- runif(100, min = 1, max = 10)
+b <- runif(100, min = 1, max = 10)
+unrelated <- data.frame(a,b)
+```
+
+## Covariance
+```{r fig_unrelate, fig.align="center", fig.height=2, fig.width=3}
+library(ggplot2)
+ggplot(unrelated, aes(x= a, y=b)) + geom_point() + theme_minimal() + geom_smooth(method = lm, color = "red", lwd = 0.75)
+```
+
+
+## Covariance
+```{r}
+cov(a, b)
+cor(a,b)
+```
+- *correlation pretty close to zero!*
+
+## Regression
+Let's start with a population model
+
+$y_{i} = \beta_{0} + \beta_{1}x_{i} + u_{i}$
+
+
+where, 
+
+
+- subscript $i$ is the unit (person, state)
+- $y$ is the dependent variable, $x$ is independent variable 
+- $\beta_{0}$ is the y-intercept 
+- $\beta_{1}$ is the coefficient (of interest)
+- $u$ is the error term; random element
+
+## Let's compare with 
+
+$y = mx+c$
+
+```{r fig_eqline, fig.align="center", fig.height=2, fig.width=3}
+x <- seq(0,10)
+c <- 2
+m <- 2
+y <- m*x + c
+eqline <- data.frame(x, y)
+ggplot(eqline, aes(x = x, y = y)) + geom_point() + geom_line() + theme_minimal() 
+```
+
+
+## Let's compare with 
+- No random element -- given a value of $x$, if you know $m$ and $c$ you can perfectly figure out the value of $y$ 
+
+## Regression
+- In the regression specification $u$ introduces randomness
+- This means that there are other factors than $x$ which influences $y$
+
+
+Note that:
+$y_{i} = \beta_{0} + \beta_{1}x_{i} + u_{i}$
+
+defines a population concept. We now want to empirically estimate $\beta_{0}$ and $\beta_{1}$
+
+- By construction, all other factors that determine $y$ except $x$ are thrown into $u$
+    - think of $u$ as a trash can
+
+
+## Assumptions for estimation
+- We need some assumptions:
+1) $E(u) = 0$; having $\beta_{0}$ (intercept) in the specification allows this
+2) $E(u|x)=E(u)$ (Mean Independence)
+    - implies that $E(ux)=0$
+    - think of $P(A|B)=\frac{P(A \cap B)}{P(B)}$
+
+What does 2) imply?
+
+
+## Mean independence 
+
+- think of relationship between schooling and wages 
+```{r}
+schooling = seq(8, 24, 1)
+#get 1000 observations from the pot with replacement 
+schooling = sample(schooling, 1000, replace = T)
+error <- rnorm(1000, mean = 0, sd = 1)
+wages = 110000 + 0.8*schooling + error 
+schooling <- data.frame(schooling, wages)
+```
+
+## Mean independence
+```{r schoolwage, fig.align = "center", fig.height = 2, fig.width = 3}
+ggplot(schooling, aes(x=schooling, y=wages)) + geom_point() + geom_smooth(method = lm, color = "red", lwd = 0.75) + theme_minimal()
+```
+
+## Mean independence 
+
+- $E(u|x)=E(u)$ means that at every slice of schooling expectation of the error term is the same 
+
+- $ability$ falls under $u$
+    - So, $E(ability|schooling=10) = E(ability|schooling=16) = E(ability|schooling=20)$  
+    
+- But if people choose schooling based on their ability, the assumption that $E(u|x)=E(u)$ may be violated
+    - Related to concept: **Correlation is not causality**
+    - A point which will be addressed in later lectures
+
+
+## Use two assumptions
+- To find the estimates of $\beta_{0}$ and $\beta_{1}$, use two assumptions:
+
+1) $E(y - \beta_0 -\beta_{1}x)=0$
+2) $E[x(y - \beta_0 -\beta_{1}x)]=0$
+
+There are two equations and two unknowns ($\beta_{0}\; and \beta_{1}$). First setup sample counterparts:
+
+a) $\frac{1}{n}\sum_{i=1}^n (y_{i} - \hat{\beta_{0}} - \hat{\beta_{1}}x_{i})=0$
+
+$~$
+
+b) $\frac{1}{n}\sum_{i=1}^n x(y_{i} - \hat{\beta_{0}} - \hat{\beta_{1}}x_{i})=0$
+
+## Use two assumptions for Ordinary Least Square
+Solve for $\beta_{0}$ from equation a)
+
+- $\frac{1}{n}\sum_{i=1}^n (y_{i} - \frac{1}{n}\sum_{i=1}^n  \hat{\beta_{0}} - \frac{1}{n}\sum_{i=1}^n \hat{\beta_{1}}x_{i})=0$
+- $\bar y_{i} - \hat{\beta_{0}} - {\beta_{1}}\hat{x_{i}}=0$
+- $\hat{\beta_{0}}= \bar{y} - \hat{\beta_{1}}\bar{x}$ 
+
+Replace $\hat{\beta_{0}}= \bar{y} - \hat{\beta_{1}}\bar{x}$ in equation b)
+
+- $\frac{1}{n}\sum_{i=1}^n x_i(y_{i} - (\bar{y} - \hat{\beta_{1}}\bar{x}) - \hat{\beta_{1}}x_{i})=0$ 
+- $\sum_{i=1}^n x_i(y_i - \bar{y})=\sum_{i=1}^n x_i(\hat{\beta_{1}}x_{i} - \hat{\beta_{1}}\bar{x})$
+- $\sum_{i=1}^n (y_i - \bar{y})=\hat{\beta_{1}}\sum_{i=1}^n(x_{i} - \bar{x})$
+- $\sum_{i=1}^n (y_i - \bar{y})(x_{i} - \bar{x})=\hat{\beta_{1}}\sum_{i=1}^n(x_{i} - \bar{x})^2$
+- $\hat{\beta_{1}} = \frac{\sum_{i=1}^n (y_i - \bar{y})(x_{i} - \bar{x})}{\sum_{i=1}^n(x_{i} - \bar{x})^2}$ 
+- $\hat{\beta_{1}} = \frac{Sample\; Cov(X,Y)}{Sample\; Var(X,Y)}$
+- OLS estimator
+
+## Next
+- replace $\hat{\beta_{1}}$ in $\hat{\beta_{0}}= \bar{y} - \hat{\beta_{1}}\bar{x}$ to find $\hat{\beta_0}$
+
+- The fitted value is given as
+    $\hat{y_i}=\hat{\beta_1}x_i+\hat{\beta_0}$
+
+- The residual is written as
+    $\hat{u_i}= y_i-\hat{\beta_1}x_i-\hat{\beta_0}$
+
+- Sum of the squares of residuals (SSR)
+    $\sum_{i=1}^n\hat{u_i}^2= \sum_{i=1}^n(y_i-\hat{\beta_1}x_i-\hat{\beta_0})^2$
+
+**Our goal is to obtain estimates of $\beta_0$ and $\beta_1$ such that it minimizes SSR. Will yield same result as before.**
+
+
+## Consider a short simulation
+```{r}
+set.seed(1)
+#simulate quantity demanded of lemonades
+lemonade = rnorm(100, 50, 10) 
+error = rnorm(100, 0, 1)
+sunscreen = 1/2*lemonade + 8*error #quantity demanded for sunscreen
+data <- data.frame(cbind(lemonade, sunscreen))
+reg1 <- lm(sunscreen ~ lemonade, data)
+reg2 <- lm(lemonade ~ sunscreen, data)
+```
+
+- lm is linear regression model; sunscreen ~ lemonade is formula, and data is the dataframe 
+
+## Sunscreen and lemonade
+```{r fig_sunlemon, fig.height=2.5, fig.width=4, fig.align="center"}
+library(ggplot2)
+ggplot(data, aes(x=sunscreen, y = lemonade)) + geom_point() + theme_minimal() + geom_smooth(method = lm, color = "red", lwd = 0.75) + annotate("text", x = 10, y = 70, color = "blue", label = paste("Slope =", 0.5109))
+```
+
+## Sunscreen and lemonade
+```{r}
+reg2
+coef(summary(reg2))
+```
+
+## Next
+- Correlation does not mean causality. 
+       
+
+

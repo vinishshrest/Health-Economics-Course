@@ -1,0 +1,64 @@
+---
+title: "Causality"
+author: "Vinish Shrestha"
+date: "08/27/2021"
+output:
+  beamer_presentation: default
+  ioslides_presentation: default
+  slidy_presentation: default
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Correlation is not causality
+```{r}
+set.seed(1)
+#simulate quantity demanded of lemonades
+lemonade = rnorm(100, 50, 10) 
+error = rnorm(100, 0, 1)
+sunscreen = 1/2*lemonade + 8*error
+temp = 1.2*lemonade + 0.4*sunscreen
+data <- data.frame(cbind(lemonade, sunscreen, temp))
+reg1 <- lm(sunscreen ~ lemonade, data)
+reg2 <- lm(lemonade ~ sunscreen, data)
+reg_control <- lm(lemonade ~ sunscreen + temp, data) 
+```
+
+## Natural Experiments .. 
+```{r}
+summary(reg1)
+```
+
+
+## Natural Experiments .. 
+```{r fig2, fig.height=2.5, fig.width=4, fig.align="center"}
+library(ggplot2)
+ggplot(data, aes(x=sunscreen, y = lemonade)) + geom_point() + theme_minimal() + geom_smooth(method = lm, color = "red", lwd = 0.75) + annotate("text", x = 10, y = 70, color = "blue", 
+           label = paste("Slope =", 0.51))
+```
+
+## Natural Experiments .. 
+```{r fig3, fig.height=2.5, fig.width=4, fig.align="center"}
+library(ggplot2)
+ggplot(data, aes(x=temp, y = lemonade)) + geom_point() + theme_minimal() + geom_smooth(method = lm, color = "red", lwd = 0.75) + annotate("text", x = 10, y = 70, color = "blue", 
+           label = paste())
+```
+
+## Natural Experiments .. 
+```{r fig4, fig.height=2.5, fig.width=4, fig.align="center"}
+library(ggplot2)
+ggplot(data, aes(x=temp, y = sunscreen)) + geom_point() + theme_minimal() + geom_smooth(method = lm, color = "red", lwd = 0.75) + annotate("text", x = 10, y = 70, color = "blue", 
+           label = paste())
+```
+
+## Natural Experiments .. 
+```{r}
+summary(reg2)
+```
+
+## Natural Experiments .. 
+```{r}
+summary(reg_control)
+```

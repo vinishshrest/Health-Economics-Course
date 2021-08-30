@@ -1,0 +1,34 @@
+---
+title: "Education Health Gradient"
+author: "Vinish Shrestha"
+date: "10/22/2020"
+output:
+  slidy_presentation: default
+  ioslides_presentation: default
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+# Education Health Gradient: 
+\begin{equation}
+health = \alpha + \beta education + \epsilon 
+\end{equation}
+
+- if $\beta>0$ does this mean there is a causal relationship
+- no
+
+\begin{equation}
+health = \alpha + \beta education + \kappa income + \sigma riskpref + \epsilon 
+\end{equation}
+
+- Does education have a causal relationship on health and how do we find out?
+
+# Paper guideline
+- Introduction
+- Natural Experiment (Policy)
+- Data
+- Strategy
+- Results 
+- Conclusion

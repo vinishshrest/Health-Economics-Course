@@ -1,0 +1,77 @@
+---
+title: 'Health, Human Capital, and Development'
+author: "Bleakley 2010"
+date: "10/27/2020"
+output:
+  slidy_presentation: default
+  ioslides_presentation: default
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+## Introduction 
+
+- "Poor countries tend to be healthy and unhealthly countries tend to be poor." How much does health stock contribute to human capital development?
+
+- Being unhealthy 
+    - depresses ability to work productively 
+  
+## Problem 
+
+- Correlation that we have seen, hard to interpret as causal evidence 
+    - geography 
+    - reverse causality (health as a normal good); health affects income and income affects health 
+    
+- This study provides a review of micro-empirical studies first; then moves to macro estimate 
+- Discusses both developing and developed countries 
+    
+## Discussion
+
+- A. early-life health and human capital 
+- model of how childhood health should affect adult outcome
+    - childhood health allows one to learn faster, grow up stronger. This is transferred to lifetime income
+    - health may also increase investment in schooling, but the discounted change in lifetime income from such investment is zero (marginal benefits and marginal cost were equated)
+    
+- B. Adult health on adult productivity 
+    - being sick reduces ability to work 
+    - if human capital is decreased due to health problems during adulthood, then parents may invest more on health during childhood
+        - second-order importance
+        
+- C. Macro assessment using the micro estimates
+
+# A. Early life health and human capital 
+
+- $Early\;life\;health ->Returns \;to\;human\;capital->Income$. economic theory shows that human-capital investments should be made early in life.
+
+# 1. Height as a proxy for health 
+- positive returns for being taller (height for age), 
+- Savedoff and Schultz (2000)
+- Ribero and Nunez (2000) find that adult wages rise 7-8\% per centimenter of height in Columbia. 
+- Use local resources available during childhood as an instrument. Is this a valid instrument?
+    
+# 2. Crital period
+- Quite a long debate, narrow window
+    
+# 3. In the womb/in utero
+- critical time -- all of the major organs are grown from scratch
+- Dutch famine study. During the end of WWII Dutch famine; famine ended abruptly with the Allied liberation. Negative impact of being in the womb during this period on childhood growth
+    See Stein, Susser, Saenger, and Marolla, 1975. 
+        - minimum effects on IQ in adulthood.
+- Almond (2006) 1981 influenza pandemic, those born in 1919 (in the womb when the pandemic hit US) had 2 percent lower income
+- Almond and Mazumder (2008); Ramadan experiment
+    
+# 4. Birthweight using twins
+- Behrman and Rosenzweig (2004) compare monozygotic (identical) twins by using variation in birthweight
+
+# 5. Nutrition
+- Early life health might also affect adult productivity because of nutrition 
+- INCAP trial in Guatemalan villages four decades ago 
+- Berhman 2009 has a review of the long term follow-up
+- Large effects of early life nutrition
+    - males who received better nutrition went on to earn wages that were one thrid more than otherwise expected
+
+# 6. Tropical parasites
+- malaria, hookworm 
+- Miguel and Kremer (2004) impacts of deworming on human capital
