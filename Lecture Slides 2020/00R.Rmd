@@ -1,0 +1,157 @@
+---
+title: "R programming"
+author: "Vinish Shrestha"
+date: "10/18/2020"
+output:
+  beamer_presentation: default
+  ioslides_presentation: default
+  slidy_presentation: default
+---
+## 
+```{r, echo = FALSE}
+x <- "Version0\nThis\tis intro.\nWe will keep building."
+writeLines(x) # see also ?strwra
+```
+
+
+## R programming install (ubuntu)
+1. install dependencies necessary for adding new repository 
+    - sudo apt install dirmngr gnupg apt-transport-https ca-certificates software-properties-common
+2. Add Comprehensive R Archive Network (CRAN) repository to the system source list
+    - sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys E298A3A825C0D65DFD57CBB651716619E084DAB9
+    - sudo add-apt-repository 'deb https://cloud.r-project.org/bin/linux/ubuntu focal-cran40/'
+3. install R
+    - sudo apt install r-base
+4. R --version
+
+## Update R 
+- $ sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys E298A3A825C0D65DFD57CBB651716619E084DAB9
+- $ sudo add-apt-repository 'deb https://cloud.r-project.org/bin/linux/ubuntu focal-cran40/'
+- $ sudo apt install r-base
+
+Install R studio
+
+- sudo apt-get install gdebi-core
+- wget https://download2.rstudio.org/server/bionic/amd64/rstudio-server-1.4.1717-amd64.deb
+- sudo gdebi rstudio-server-1.4.1717-amd64.deb
+
+
+## Install for windows
+- visit this [site](https://cran.r-project.org/)
+- click download R for windows 
+- click on base 
+- Then click "Download R 4.1.1 for Windows
+
+Next, you'd wanna install RStudio IDE, for better environment
+
+- go to rstudio [page](https://www.rstudio.com/products/rstudio/download/#download)
+- pick the appropriate OS and download
+- The current file for windows is RStudio-1.4.1717.exe
+
+Use this [\color{blue}{link}](https://www.datacamp.com/community/tutorials/installing-R-windows-mac-ubuntu) as a helpful resource
+Watch this [\color{blue}{video}](https://www.youtube.com/watch?v=NZxSA80lF1I) as a guide if you have problems redo.
+
+## Helpful resources to learn
+- [\color{blue}{Venables and friends}](https://cran.r-project.org/doc/manuals/r-release/R-intro.pdf)
+- [\color{blue}{Grolemund}](https://rstudio-education.github.io/hopr/)
+- stackover flow
+- CRAN [\color{blue}{https://CRAN.R-project.org}](https://CRAN.R-project.org) 
+
+## 1. Numbers and vectors 
+```{r, warning = FALSE, message=FALSE}
+x <- c(7.4, 5.2, 10.2, 3.3)
+print(x)
+```
+- x is a variable (object), c() is a function that can store vector arguments
+- <- tells that object c receives the designated values; can be replaced by "=" in most instances
+
+```{r, warning = FALSE, message=FALSE}
+length(x)
+y <- 2*x - 4 #basic arithmetic
+print(y)
+```
+
+## 2. Regular sequences
+```{r, warning=F, message=F}
+even_n <- seq(2, 20, 2)
+odd_n <- seq(1,19, 2)
+even_n
+odd_n
+```
+Repetition
+
+```{r, warning=F, message=F}
+rep1 <- rep(1:3, 2)
+rep2 <- rep(1:3, each = 2)
+rep1
+rep2
+```
+
+## 3. Missing values
+- Often values of variables in observational data are missing 
+- missing data is represented by NA
+```{r, warning=F, message=F}
+x <- c(seq(2, 6, 2), NA)
+x
+```
+
+Say now you want to drop the missing observation from the vector x and store it in vector y 
+
+```{r, warning=F, message=F}
+y <- x[!is.na(x)]
+y
+```
+
+## 4. Location of a vector 
+- use $[i]$, where $i$ is the integer of interest to find out $i^{th}$ element of a vector 
+
+```{r, warning=F, message=F}
+even_n <- seq(2, 20, 2)
+paste("The second element of even_n is", even_n[2], 
+      sep = " ")
+```
+- here paste joins the character or string "The second element of even_n is" with the object even_n[2]
+
+## Quotes
+```{r}
+x <- "long\tlines can be\nbroken with newlines"
+print(x)
+writeLines(x) # see also ?strwra
+```
+- see ?Quotes 
+
+## 5. Class
+1. Character vector 
+- entered by "
+
+```{r}
+a <- c("A", "B","C")
+a
+class(a)
+```
+2. Numeric 
+```{r}
+x <- seq(1, 10, 1)
+class(x)
+```
+
+## Other objects 
+- matrices: multi-dimensional vectors
+- factors: efficient way to handle categorical variables
+- lists: general form of vector that handles objects of different classes
+- data.frames: typical data as in excel 
+- functions: used to manipulate data
+
+## A Simple Plot
+```{r, fig.align= "center", fig.height = 3, fig.width= 3}
+x <- seq(1, 10, 1)
+y <- 2 + x*7
+plot(x, y)
+lines(x, y)
+```
+
+## 
+```{r, echo = FALSE}
+z <- " practice\n practice\n practice"
+writeLines(z)
+```
