@@ -120,7 +120,7 @@ writeLines(x) # see also ?strwra
 ```
 - see ?Quotes 
 
-## 5. Class
+## 5. R Objects and Class
 1. Character vector 
 - entered by "
 
@@ -128,11 +128,44 @@ writeLines(x) # see also ?strwra
 a <- c("A", "B","C")
 a
 class(a)
+is.vector(a) #tests whether a is vector
+length(a) #returns length
 ```
+
+## 5. R Objects and Class
 2. Numeric 
 ```{r}
 x <- seq(1, 10, 1)
 class(x)
+length(x) #know the length
+x[1] #first element of vector x
+```
+
+## 5. R Objects and Class
+3. Logicals 
+
+```{r}
+
+a <- 4
+l <- a>3
+class(l)
+```
+
+## 5. R Objects and Class
+4. Matrix  
+
+```{r}
+
+mat <- matrix(0, nrow = 3, ncol = 3) #three by three matrix
+mat #display the matrix
+mat[,1] #display the first column of the matrix
+```
+
+## 5.
+5. arrays
+```{r}
+ar <- array(c(11:14, 21:24, 31:34), dim = c(2, 2, 3))
+ar
 ```
 
 ## Other objects 
@@ -148,6 +181,12 @@ x <- seq(1, 10, 1)
 y <- 2 + x*7
 plot(x, y)
 lines(x, y)
+```
+
+##
+```{r, echo = FALSE}
+nextc <- "End Sept 8; Next time\n 1. dataframe\n 2. manipulating dataframe\n 3. running simple regression "
+writeLines(nextc)
 ```
 
 ## 
